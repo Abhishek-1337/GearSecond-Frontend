@@ -1,6 +1,12 @@
+import Button from "./components/ui/Button"
+
 function App() {
   return (
-    <div className="bg-amber-500">Hello, world</div>
+    <>
+      <Button text="Share" variant="primary" size="sm"/>
+      <Button text="Share" variant="primary" size="md"/>
+      <Button text="Share" variant="primary" size="lg"/>
+    </>
   )
 }
 
