@@ -1,11 +1,13 @@
-import Button from "./components/ui/Button"
+import Home from "./components/pages/Home"
+// import Button from "./components/ui/Button"
 
 function App() {
   return (
     <>
-      <Button text="Share" variant="primary" size="sm"/>
+      <Home/>
+      {/* <Button text="Share" variant="primary" size="sm"/>
       <Button text="Share" variant="primary" size="md"/>
-      <Button text="Share" variant="primary" size="lg"/>
+      <Button text="Share" variant="primary" size="lg"/> */}
     </>
   )
 }
