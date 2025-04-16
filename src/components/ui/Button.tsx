@@ -1,8 +1,10 @@
+import React from "react";
+
 type Variant = "primary" | "secondary";
 
 interface Props {
     variant: Variant;
-    startIcon?: never;
+    startIcon?: React.ComponentType<React.SVGProps<SVGSVGElement>>
     endIcon?: never;
     text?: string,
     size: "sm" | "md" | "lg";
@@ -25,7 +27,10 @@ const defaultStyle = "px-3 py-1 border-2 rounded-md";
 const Button = (props: Props) => {
   return (
     <button className={`${variantStyle[props.variant]} ${defaultStyle} ${sizeMap[props.size]}`}> 
-        {props.text}
+        <div className="flex items-center">
+          {props.startIcon && <props.startIcon/>}
+          {props.text}
+        </div>
     </button>
   )
 }
