@@ -13,7 +13,7 @@ interface Props {
 
 const variantStyle = {
     "primary": "bg-blue-600 text-white",
-    "secondary": "bg-blue-400 text-blue-900 outline-none"
+    "secondary": "bg-blue-300 text-blue-900 outline-none"
 }
 
 const sizeMap = {
