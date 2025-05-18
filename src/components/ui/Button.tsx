@@ -22,11 +22,11 @@ const sizeMap = {
     "lg": "px-8 py-3 text-xl",
 }
 
-const defaultStyle = "cursor-pointer px-3 py-1 rounded-md";
+const defaultStyle = "cursor-pointer px-3 py-3 rounded-md leading-2";
 
 const Button = (props: Props) => {
   return (
-    <button className={`${variantStyle[props.variant]} ${defaultStyle} ${sizeMap[props.size]}`}> 
+    <button className={`${variantStyle[props.variant]} ${defaultStyle} ${sizeMap[props.size]}`} onClick={props.onClick}> 
         <div className="flex gap-2 items-center">
           {props.startIcon && props.startIcon}
           {props.text}
