@@ -9,6 +9,7 @@ interface Props {
     text?: string,
     size: "sm" | "md" | "lg";
     onClick?: () => void;
+    additionalStyles?: string;
 }
 
 const variantStyle = {
@@ -26,7 +27,7 @@ const defaultStyle = "cursor-pointer px-3 py-3 rounded-md leading-2";
 
 const Button = (props: Props) => {
   return (
-    <button className={`${variantStyle[props.variant]} ${defaultStyle} ${sizeMap[props.size]}`} onClick={props.onClick}> 
+    <button className={`${variantStyle[props.variant]} ${defaultStyle} ${sizeMap[props.size]} ${props.additionalStyles} hover:scale-105 transition-all`} onClick={props.onClick}> 
         <div className="flex gap-2 items-center">
           {props.startIcon && props.startIcon}
           {props.text}

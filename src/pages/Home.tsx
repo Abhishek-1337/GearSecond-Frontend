@@ -1,18 +1,21 @@
 import { useState } from "react";
-import Sidebar from "../ui/Sidebar";
-import Card from "../ui/Card";
-import Modal from "../ui/Modal";
-import Button from "../ui/Button";
-import Dropdown from "../ui/Dropdown";
-import Input from "../ui/Input";
+import Sidebar from "../components/ui/Sidebar";
+import Card from "../components/ui/Card";
+import Modal from "../components/ui/Modal";
+import Button from "../components/ui/Button";
+import Dropdown from "../components/ui/Dropdown";
+import Input from "../components/ui/Input";
 import ShareIcon from "../icons/ShareIcon";
 import PlusIcon from "../icons/PlusIcon";
 import FileIcon from "../icons/FileIcon";
+import { postContent } from "../utils/api"
 
 const Home = () => {
   const [selectedItem, setSelectedItem] = useState<{name: string}>({name: "document"});
   const [fileName, setFileName ] = useState<string>("Filename");
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+  const [ link, setLink ] = useState<string>("");
+  const [ title, setTitle ] = useState<string>("");
 
   const fileHandlerFn = (event: React.ChangeEvent<HTMLInputElement>) => {
     const inputElement = event.target;
@@ -23,12 +26,18 @@ const Home = () => {
           if(file.name.length > 14) {
             const prefix = file.name.slice(0,6);
             const suffix = file.name.slice(-5);
-
             filename = prefix + "..." +suffix;
           }
           setFileName(filename);
         }
     }
+  }
+
+  const handleSubmit = () => {
+    if( !title || !link ) {
+      return;
+    }
+    postContent({title, link, type: selectedItem.name });
   }
 
   return (
@@ -44,7 +53,7 @@ const Home = () => {
                 title="title" 
                 placeholder="Give a title to remember" 
                 id="title_input" 
-                onChange={(e) => {}}
+                onChange={(e) => { setTitle(e.target.value) }}
                 additionalStyles="focus:outline-blue-500 focus:outline border border-gray-400 px-2 py-1 rounded-lg min-w-60 max-w-65"
                 />
               </div>
@@ -78,7 +87,9 @@ const Home = () => {
                     title="tweet" 
                     id="tweet-link" 
                     placeholder= "Paste your link here." 
-                    onChange={(e) => {}}
+                    onChange={(e) => {
+                      setLink(e.target.value); 
+                    }}
                     additionalStyles="focus:outline-blue-500 focus:outline border border-gray-400 px-2 py-1 rounded-lg min-w-60"
                     />
                   </div>
@@ -86,6 +97,12 @@ const Home = () => {
               }
               </div>
             </div>
+
+            <div className="mt-4 py-2 justify-end flex gap-4">
+                <Button size="sm" variant="primary" text="Submit" onClick={handleSubmit}/>
+                <Button size="sm" variant="primary" text="Cancel" additionalStyles="bg-red-600" onClick={() => setIsModalOpen(false)}/>
+              </div>
+
           </Modal>
         )
       }

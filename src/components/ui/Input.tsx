@@ -1,3 +1,5 @@
+import { Ref } from "react";
+
 interface Props {
   title: string;
   type: string;
@@ -5,6 +7,7 @@ interface Props {
   additionalStyles?: string;
   id: string;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  reference?: Ref<HTMLInputElement | null>;
 }
 
 const Input = ({
@@ -13,10 +16,12 @@ const Input = ({
   placeholder='',
   additionalStyles='',
   id,
-  onChange
+  onChange,
+  reference
 }: Props) => {
   return (
     <input 
+    ref={reference}
     type={type} 
     name={title} 
     id={id} 

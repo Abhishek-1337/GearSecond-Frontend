@@ -1,4 +1,4 @@
-import Home from "./components/pages/Home"
+import Home from "./pages/Home"
 // import Button from "./components/ui/Button"
 
 function App() {

@@ -1,5 +1,5 @@
-import ShareIcon from "../icons/ShareIcon"
-import TrashIcon from "../icons/TrashIcon"
+import ShareIcon from "../..//icons/ShareIcon"
+import TrashIcon from "../../icons/TrashIcon"
 
 const Card = () => {
   return (

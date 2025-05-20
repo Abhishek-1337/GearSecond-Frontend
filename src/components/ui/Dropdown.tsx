@@ -1,5 +1,5 @@
 import { Dispatch, SetStateAction, useState } from "react";
-import ChevronDownIcon from "../icons/ChevronDownIcon";
+import ChevronDownIcon from "../../icons/ChevronDownIcon";
 
 const modalDropdownItems = ["document","tweet", "youtube", "link"];
 

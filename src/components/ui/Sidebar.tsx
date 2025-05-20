@@ -1,10 +1,10 @@
-import DocumentIcon from "../icons/DocumentIcon";
-import YoutubeIcon from "../icons/YoutubeIcon";
-import TwitterIcon from "../icons/TwitterIcon";
-import LinkIcon from "../icons/LinkIcon";
-import TagIcon from "../icons/TagIcon";
+import DocumentIcon from "../../icons/DocumentIcon";
+import YoutubeIcon from "../../icons/YoutubeIcon";
+import TwitterIcon from "../../icons/TwitterIcon";
+import LinkIcon from "../../icons/LinkIcon";
+import TagIcon from "../../icons/TagIcon";
 import SidebarItem from "./SidebarItem"
-import LogoIcon from "../icons/LogoIcon";
+import LogoIcon from "../../icons/LogoIcon";
 
 const Sidebar = () => {
   return (

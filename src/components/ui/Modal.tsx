@@ -11,7 +11,7 @@ const Backdrop = ({ setIsModalOpen }) => {
 
 const ModalOverlay = (props) => {
     return (
-        <div className="bg-white fixed top-[35%] left-[40%] rounded-lg min-w-80 h-60 px-4 py-6 text-center">{props.children}</div>
+        <div className="bg-white fixed top-[30%] left-[35%] rounded-lg px-4 py-6 text-center">{props.children}</div>
     );
 }
 
