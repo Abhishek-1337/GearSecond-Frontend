@@ -16,3 +16,17 @@ export const postContent = async (data) => {
     };
   }
 };
+
+
+export const registerUser = async (data) => {
+  try{
+    const res = await apiClient.post("/signup", data);
+    console.log(res);
+  }
+  catch(ex) {
+    return {
+      error: true,
+      errorMsg: ex
+    }
+  }
+}
