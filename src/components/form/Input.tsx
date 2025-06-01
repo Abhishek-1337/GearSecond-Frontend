@@ -1,8 +1,16 @@
+import { useEffect } from "react";
 import { useFormContext } from "react-hook-form"
 
 const Input = ({id, label, name, type, additionalStyles=""}) => {
-  const { register, formState: { errors } } = useFormContext();
+  const { register, formState, formState: { errors }, reset } = useFormContext();
   const error = errors?.[name]?.message as string | undefined;
+
+  useEffect(() => {
+    if(formState.isSubmitSuccessful) {
+      reset();
+    }
+  }, [formState, reset]);
+  
   console.log(error);
   return (
     <div className="mb-4">

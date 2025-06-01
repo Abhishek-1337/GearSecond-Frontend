@@ -1,8 +1,10 @@
 import { useForm, FormProvider } from "react-hook-form"
+import { useNavigate } from "react-router-dom";
 import Button from "../components/ui/Button";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import Input from "../components/form/Input";
+import { registerUser } from "../utils/api";
 
 const registerSchema = yup.object({
   username: yup.string().min(3).max(15).required("Username is required."),
@@ -13,12 +15,23 @@ const registerSchema = yup.object({
 export type RegisterSchemaType = yup.InferType<typeof registerSchema>;
 
 const Signup = () => {
+  const navigate = useNavigate();
   const methods = useForm<RegisterSchemaType>({
-    resolver: yupResolver(registerSchema)
+    resolver: yupResolver(registerSchema),
+    defaultValues: {
+      username: "",
+      email: "",
+      password: ""
+    }
   });
 
-  const onSubmit = (data: RegisterSchemaType) => {
-    console.log(data);
+  const onSubmit = async (data: RegisterSchemaType) => {
+    const res = await registerUser(data);
+    if(res?.error) {
+      return;
+    }
+    localStorage.setItem("token", res.token);
+    navigate("/");
   }
 
   return (

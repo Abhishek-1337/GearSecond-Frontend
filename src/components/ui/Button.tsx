@@ -18,19 +18,19 @@ const variantStyle = {
 }
 
 const sizeMap = {
-    "sm": "px-2 py-1 text-md",
-    "md": "px-5 py-2 text-lg",
-    "lg": "px-8 py-3 text-xl",
+    "sm": "px-2 text-md",
+    "md": "px-5 py-1 text-lg",
+    "lg": "px-7 py-2 text-xl",
 }
 
-const defaultStyle = "cursor-pointer px-3 py-3 rounded-md leading-2";
+const defaultStyle = "cursor-pointer px-3 rounded-md";
 
 const Button = (props: Props) => {
   return (
     <button className={`${variantStyle[props.variant]} ${defaultStyle} ${sizeMap[props.size]} ${props.additionalStyles} hover:scale-105 transition-all`} onClick={props.onClick}> 
         <div className="flex gap-2 items-center justify-center">
-          {props.startIcon && props.startIcon}
-          {props.text}
+          <div>{props.startIcon && props.startIcon}</div>
+          <div>{props.text}</div>
         </div>
     </button>
   )
