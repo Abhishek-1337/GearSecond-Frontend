@@ -37,7 +37,7 @@ const AddContentModal = ({setIsModalOpen}: Props) => {
       return;
     }
     postContent({title, link, type: selectedItem.name });
-    setSelectedItem({name: ""});
+    setSelectedItem({name: "document"});
     setLink("");
     setTitle("");
   }
@@ -97,8 +97,8 @@ const AddContentModal = ({setIsModalOpen}: Props) => {
             </div>
 
             <div className="mt-4 py-2 justify-end flex gap-4">
-                <Button size="sm" variant="primary" text="Submit" onClick={handleSubmit}/>
-                <Button size="sm" variant="primary" text="Cancel" additionalStyles="bg-red-600" onClick={() => setIsModalOpen(false)}/>
+                <Button size="sm" variant="primary" text="Submit" onClick={handleSubmit} additionalStyles="py-1"/>
+                <Button size="sm" variant="primary" text="Cancel" additionalStyles="bg-red-600 py-1" onClick={() => setIsModalOpen(false)}/>
               </div>
 
           </Modal>

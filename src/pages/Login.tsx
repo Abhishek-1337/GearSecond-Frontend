@@ -4,6 +4,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import Input from "../components/form/Input";
 import { registerUser } from "../utils/api";
+import ModalCanvas from "../components/ui/ModalCanvas";
 
 const loginSchema = yup.object({
   email: yup.string().email().required("Email is required"),
@@ -26,15 +27,13 @@ const Login = () => {
     <div className="bg-yellow-50 h-screen flex justify-center items-center">
         <FormProvider {...methods}>
           <form className="bg-white rounded-lg shadow-md p-8 relative flex flex-col items-center" onSubmit ={methods.handleSubmit(onSubmit)}>
-        <div className="rounded-full bg-yellow-500 w-17 h-17 absolute -top-7 -right-7 shadow-lg">
-          <div className="w-full h-1/2 bg-white rounded-b-full translate-x-3 translate-y-1/5 rotate-230 border-2 border-white shadow-lg"></div>
-        </div>
+        <ModalCanvas/>
         <p className="text-2xl text-gray-800 font-semibold mb-6">Log in to Second Brain account</p>
           
           <Input id="email" label="Email" name="email" type="email" additionalStyles="ml-10"/>
           <Input id="password" label="Password" name="password" type="password"/>
           
-          <Button text="Submit" size="sm" variant="primary" additionalStyles="w-[90%] text-center"/>
+          <Button text="Submit" size="sm" variant="primary" additionalStyles="w-[100%] text-center mt-4 hover:none"/>
         </form>
         </FormProvider>
     </div>

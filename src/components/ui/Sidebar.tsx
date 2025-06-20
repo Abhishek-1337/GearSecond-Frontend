@@ -14,11 +14,11 @@ const Sidebar = () => {
           <span className="font-logo font-semibold">GEARSECOND</span> 
         </div>
         <div className="flex flex-col gap-3">
-        <SidebarItem icon={<YoutubeIcon size="lg"/>} text="Videos"/>
-        <SidebarItem icon={<DocumentIcon size="lg"/>} text="Documents"/>
-        <SidebarItem icon={<TwitterIcon size="lg"/>} text="Twitter"/>
-        <SidebarItem icon={<LinkIcon size="lg"/>} text="Links"/>
-        <SidebarItem icon={<TagIcon size="lg"/>} text="Tags"/>
+        <SidebarItem icon={<YoutubeIcon size="md"/>} text="Videos"/>
+        <SidebarItem icon={<DocumentIcon size="md"/>} text="Documents"/>
+        <SidebarItem icon={<TwitterIcon size="md"/>} text="Twitter"/>
+        <SidebarItem icon={<LinkIcon size="md"/>} text="Links"/>
+        <SidebarItem icon={<TagIcon size="md"/>} text="Tags"/>
         </div>
     </div>
   )

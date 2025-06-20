@@ -6,6 +6,7 @@ import ShareIcon from "../icons/ShareIcon";
 import PlusIcon from "../icons/PlusIcon";
 import { GetAllContent } from "../utils/api"
 import AddContentModal from "../components/ui/AddContentModal";
+import { useNavigate } from "react-router-dom";
 
 interface Content{
   type: string;
@@ -17,12 +18,27 @@ interface Content{
 const Home = () => {
 
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
-  const [contents, setContents] = useState<Content[]>([]);  
+  const [contents, setContents] = useState<Content[]>([]); 
+  const navigate = useNavigate();
+  
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    if(!token){
+      navigate("/login");
+    }
+  },[]);
 
   const fetchAllContent = async () => {
     try{
       const res = await GetAllContent();
-      console.log(res.contents);
+      console.log(res);
+      const updatedContent = res.contents.map((content) => {
+        if(content.type === "tweet") {
+          content.link = content.link.split('/')[content.link.split('/').length-1];
+        // setContents([ ...res.contents, link: tweetId]);
+          return content
+        }
+      })
       setContents(res.contents);
     }
     catch(ex){
@@ -52,10 +68,10 @@ const Home = () => {
               <Button text="Add Content" variant="secondary" size="md" startIcon={<PlusIcon size="md"/>} onClick={() => setIsModalOpen(true)}/>
             </div>
           </div>
-          <div className="p-2 px-4 my-16">  
+          <div className="p-2 px-4 my-16 flex gap-6">  
             {
             contents.length > 0 && (
-              contents.map((content) => <Card link={content.link} type={content.type} title={content.title}/>)
+              contents.map((content) => <Card key={`${content.title + content.userId}`} link={content.link} type={content.type} title={content.title}/>)
             )}
           </div>
         </div>

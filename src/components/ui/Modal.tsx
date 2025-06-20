@@ -3,7 +3,7 @@ import ReactDOM from "react-dom";
 const Backdrop = ({ setIsModalOpen }) => {
     return (
         <div 
-        className="fixed w-screen h-[100vh] opacity-70 bg-black" 
+        className="fixed w-screen h-[100vh] opacity-80 bg-black" 
         onClick={() => setIsModalOpen(false)}
         ></div>
     );
@@ -11,7 +11,7 @@ const Backdrop = ({ setIsModalOpen }) => {
 
 const ModalOverlay = (props) => {
     return (
-        <div className="bg-white fixed top-[30%] left-[35%] rounded-lg px-4 py-6 text-center">{props.children}</div>
+        <div className="bg-white fixed top-[30%] left-[35%] rounded-lg px-4 py-6 text-center z-20">{props.children}</div>
     );
 }
 
