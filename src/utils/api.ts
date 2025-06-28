@@ -14,6 +14,10 @@ apiClient.interceptors.request.use((config) => {
   return config;
 }, (err) => Promise.reject(err));
 
+// apiClient.interceptors.response.use((response) => {
+//     if()
+// })
+
 export const postContent = async (data) => {
   try {
     const res = await apiClient.post("/content", data);
@@ -44,6 +48,19 @@ export const GetAllContent = async () => {
   try{
     const res = await apiClient.get("content/all");
     return res.data;
+  }
+  catch(ex){
+    return {
+      error: true,
+      errorMsg: ex
+    }
+  }
+}
+
+export const FetchUser = async () => {
+  try{
+      const res = await apiClient.get("user/me");
+      return res.data.user;
   }
   catch(ex){
     return {

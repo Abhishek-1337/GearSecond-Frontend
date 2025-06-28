@@ -31,15 +31,7 @@ const Home = () => {
   const fetchAllContent = async () => {
     try{
       const res = await GetAllContent();
-      console.log(res);
-      const updatedContent = res.contents.map((content) => {
-        if(content.type === "tweet") {
-          content.link = content.link.split('/')[content.link.split('/').length-1];
-        // setContents([ ...res.contents, link: tweetId]);
-          return content
-        }
-      })
-      setContents(res.contents);
+      setContents(res.contents || []);
     }
     catch(ex){
       console.log(ex);
@@ -50,7 +42,6 @@ const Home = () => {
     fetchAllContent();
   }, []);
 
-  console.log(contents.length);
   return (
     <div className="bg-gray-200 h-screen w-full flex">
       
