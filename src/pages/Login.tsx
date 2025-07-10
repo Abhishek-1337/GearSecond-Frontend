@@ -3,8 +3,9 @@ import Button from "../components/ui/Button";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import Input from "../components/form/Input";
-import { registerUser } from "../utils/api";
 import ModalCanvas from "../components/ui/ModalCanvas";
+import { useAuth } from "../context/AuthContext";
+import { useNavigate } from "react-router-dom";
 
 const loginSchema = yup.object({
   email: yup.string().email().required("Email is required"),
@@ -17,10 +18,17 @@ const Login = () => {
   const methods = useForm<loginSchemaType>({
     resolver: yupResolver(loginSchema)
   });
+  const navigate = useNavigate();
+  const {login} = useAuth();
 
   const onSubmit = async (data: loginSchemaType) => {
-    const res = await registerUser(data);
-    console.log(res);
+    try{
+      await login(data.email, data.password);
+      navigate("/");
+    }
+    catch(ex) {
+      console.log(ex);
+    }
   }
 
   return (

@@ -9,9 +9,6 @@ function App() {
   const { user } = useAuth();
   const navigate = useNavigate();
   
-  if(!user){
-    navigate("/login");
-  }
   return (
     <>
       <Routes>

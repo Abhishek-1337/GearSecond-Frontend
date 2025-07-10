@@ -6,7 +6,7 @@ const apiClient = axios.create({
 });
 
 apiClient.interceptors.request.use((config) => {
-  const token = localStorage.getItem("token");
+  const token = localStorage.getItem("Access");
   if(token){
     config.headers.Authorization = `Bearer ${token}`
   }
@@ -14,9 +14,26 @@ apiClient.interceptors.request.use((config) => {
   return config;
 }, (err) => Promise.reject(err));
 
-// apiClient.interceptors.response.use((response) => {
-//     if()
-// })
+apiClient.interceptors.response.use((response) => {
+    return response;
+}, async (error) => {
+  const originalRequest = error.config;
+  console.log(originalRequest);
+  if(error.response.status === 403 ){
+    await refreshToken();
+    console.log(error);
+  }
+  return Promise.reject(error)  
+});
+
+export const refreshToken = async () => {
+  try{
+    await apiClient.get("/user/refresh",  { withCredentials: true });
+  }
+  catch(err){
+    console.log(err);
+  }
+}
 
 export const postContent = async (data) => {
   try {
@@ -30,10 +47,22 @@ export const postContent = async (data) => {
   }
 };
 
+export const loginUser = async (data) => {
+  try {
+    const res = await apiClient.post("user/login", data);
+    return res.data;
+  } catch (ex) {
+    return {
+      error: true,
+      errorMsg: ex
+    }
+  }
+}
 
 export const registerUser = async (data) => {
   try{
     const res = await apiClient.post("user/signup", data);
+    console.log(res);
     return res.data;
   }
   catch(ex) {
@@ -61,6 +90,18 @@ export const FetchUser = async () => {
   try{
       const res = await apiClient.get("user/me");
       return res.data.user;
+  }
+  catch(ex){
+    return {
+      error: true,
+      errorMsg: ex
+    }
+  }
+}
+
+export const logOut = async () => {
+  try{
+      await apiClient.get("user/logout");
   }
   catch(ex){
     return {
