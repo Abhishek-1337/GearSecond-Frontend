@@ -2,6 +2,7 @@ import axios from "axios";
 
 const apiClient = axios.create({
   baseURL: "http://localhost:3000/api/v1",
+  withCredentials: true,
   timeout: 10000,
 });
 
@@ -18,17 +19,30 @@ apiClient.interceptors.response.use((response) => {
     return response;
 }, async (error) => {
   const originalRequest = error.config;
+  let tryReq = false;
   console.log(originalRequest);
-  if(error.response.status === 403 ){
+  if(error.response.status === 403 && !tryReq){
+    tryReq = true;
     await refreshToken();
-    console.log(error);
+
+        // Retry original request with new token
+      return apiClient(originalRequest);
+    // if(data ){
+    //   return;
+    // }
+    // localStorage.setItem("Access", data.access_token);
+    
   }
   return Promise.reject(error)  
 });
 
 export const refreshToken = async () => {
   try{
-    await apiClient.get("/user/refresh",  { withCredentials: true });
+    const res = await apiClient.post("/user/refresh");
+    if(res){
+      localStorage.setItem("Access", res.data.access_token);
+    }
+
   }
   catch(err){
     console.log(err);
